@@ -1,20 +1,26 @@
+const DISCOUNTS = {
+    Regular: 0,
+    Member: 10,
+    VIP: 20,
+};
+
+const SHIPPING_COSTS = {
+    Electronics: 10,
+    Books: 0,
+    Clothing: 5,
+};
+
 function Handle(input) {
     const parts = input.split(' ');
 
     const customer = parts[0];
 
-    let discount = 0;
-
-    if (customer === 'Regular') {
-        discount = 0;
-    } else if (customer === 'Member') {
-        discount = 10;
-    } else if (customer === 'VIP') {
-        discount = 20;
-    } else {
+    if (!(customer in DISCOUNTS)) {
         console.log('INVALID CUSTOMER TYPE');
         return;
     }
+
+    const discount = DISCOUNTS[customer];
 
     let subtotal = 0;
     let shipping = 0;
@@ -26,18 +32,13 @@ function Handle(input) {
         const price = parseInt(item[1], 10);
         const quantity = parseInt(item[2], 10);
 
-        subtotal += price * quantity;
-
-        if (category === 'Electronics') {
-            shipping += 10 * quantity;
-        } else if (category === 'Books') {
-            shipping += 0;
-        } else if (category === 'Clothing') {
-            shipping += 5 * quantity;
-        } else {
+        if (!(category in SHIPPING_COSTS)) {
             console.log('INVALID CATEGORY');
             return;
         }
+
+        subtotal += price * quantity;
+        shipping += SHIPPING_COSTS[category] * quantity;
     }
 
     let total = subtotal - (subtotal * discount) / 100;
