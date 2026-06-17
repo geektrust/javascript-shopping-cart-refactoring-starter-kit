@@ -1,3 +1,4 @@
+const Handle = require("./shoppingCart")
 /*
  ***********************************************
  * This is the driver code. Don't change it!!!
@@ -12,8 +13,7 @@ const orders = [
     'Regular Toys:30:2',
 ];
 
-// Replace with process.argv.slice(2) in actual usage
-const args = [];
+const args = process.argv.slice(2)
 
 if (args.length === 0) {
     console.log('Arguments are required to run the program.');
