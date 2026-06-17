@@ -49,3 +49,5 @@ function Handle(input) {
 
     console.log(`Order Total: ${total.toFixed(2)}`);
 }
+
+module.exports = Handle
